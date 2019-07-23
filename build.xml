@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="rbac" default="default" basedir=".">
+
+    <property name="name" value="rbac"/>
+
+    <property name="proName"   value="kevin"/>
+    <property name="copyright" value="gaozou.org"/>
+
+    <property name="dir.dev" value="../../../develop"/>
+    <property name="dir.pro" value="../../../project"/>
+
+    <property name="dir.out" value="${dir.pro}/${proName}/out/production/${name}"/>
+    <property name="dir.dst" value="${dir.dev}/dst/${proName}/"/>
+    <property name="dir.app" value="${dir.dev}/app"/>
+
+    <property name="dir.src" value="src"/>
+
+    <property name="file.jar" value="${dir.dst}/${proName}-${name}.jar"/>
+
+    <property name="log"    value="${dir.app}/log/"/>
+    <property name="dom4j"   value="${dir.app}/dom4j"/>
+    <property name="utility" value="${dir.dev}/dst/kevin//kevin-utility.jar"/>
+
+    <path id="classpath">
+        <fileset dir="${log}" includes="**/*.jar"/>
+        <fileset dir="${dom4j}" includes="**/*.jar"/>
+        <pathelement location="${utility}"/>
+        <pathelement location="${dir.out}"/>
+    </path>
+
+
+    <target name="default" depends="dist" description="default: distribute project"/>
+
+    <target name="clean" description="Remove all outputs">
+        <delete dir="${dir.out}"/>
+        <delete file="${file.jar}"/>
+    </target>
+
+    <target name="compile" depends="clean" description="Generate outputs">
+        <mkdir dir="${dir.out}"/>
+        <javac srcdir="${dir.src}" destdir="${dir.out}" classpathref="classpath" debug="on" deprecation="on" fork="on" optimize="on"/>
+        <copy todir="${dir.out}" preservelastmodified="true">
+            <fileset dir="${dir.src}" excludes="**/*.java"/>
+        </copy>
+    </target>
+
+    <target name="dist" depends="compile" description="Distribute project (jars etc)">
+        <jar destfile="${file.jar}" filesonly="false">
+            <manifest>
+                <attribute name="Created-By" value="gaozou.org"/>
+                <attribute name="Manifest-Version" value="1.0"/>
+            </manifest>
+            <fileset dir="${dir.out}"/>
+        </jar>
+    </target>
+
+</project>

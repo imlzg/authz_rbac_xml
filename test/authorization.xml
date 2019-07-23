@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--<authz>
+    <privileges>
+        <privilege name="view" action="/test/view.action"/>
+        <privilege name="edit" action="/test/edit*.action"/>
+        <privilege name="adminentry" action="/admin/entry"/>
+        <privilege name="adminhost" action="/admin/host"/>
+        <privilege name="adminepisode" action="/admin/episode"/>
+        <privilege name="adminlink" action="/admin/link/*" excludes="/admin/link/episode,/admin, /admin/link/host"/>
+    </privileges>
+    <roles>
+        <role name="user">
+            <right privilege="view"/>
+        </role>
+        <role name="editor">
+            <right privilege="view"/>
+            <right privilege="edit"/>
+        </role>
+        <role name="admin">
+            <right privilege="edit"/>
+            <right privilege="admin*" excludes="adminentry, adminhost"/>
+        </role>
+    </roles>
+</authz>-->
+
+
+<authz>
+    <privileges>
+        <privilege name="profile" action="/profile"/>
+        <privilege name="saveprofile" action="/saveprofile"/>
+        <privilege name="addreview" action="/addreview"/>
+        <privilege name="savereview" action="/savereview"/>
+        <privilege name="editreview" action="/editreview"/>
+        <privilege name="deletereview" action="/deletereview"/>
+        <privilege name="addsource" action="/addsource"/>
+        <privilege name="savesource" action="/savesource"/>
+        <privilege name="savetag" action="/savetag"/>
+        <privilege name="savetopic" action="/savetopic"/>
+        <privilege name="savepost" action="/savepost"/>
+
+        <privilege name="admin" action="/admin/*" excludes="/admin/signup, /admin/login"/>
+    </privileges>
+    <roles>
+
+        <role name="user">
+            <right privilege="profile"/>
+            <right privilege="saveprofile"/>
+            <right privilege="addreview"/>
+            <right privilege="savereview"/>
+            <right privilege="editreview"/>
+        </role>
+
+        <role name="editor">
+            <right privilege="savepost"/>
+        </role>
+
+        <role name="adm">
+            <right privilege="admin"/>
+        </role>
+
+        <role name="admin">
+            <right privilege="*"/>
+        </role>
+    </roles>
+</authz>
